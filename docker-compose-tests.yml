@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  database:
+    image: postgres:13
+    container_name: database
+    restart: always
+    ports:
+      - 4457:5432
+    env_file:
+      - .env.test
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    env_file:
+      - .env.test
+    depends_on:
+      - database
