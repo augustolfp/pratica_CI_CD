@@ -6,6 +6,7 @@ app.use(json());
 
 app.get("/students", async (req: Request, res: Response) => {
   const students = await prisma.student.findMany();
+  console.log("Salve quebrada");
   res.send(students);
 });
 
@@ -13,7 +14,7 @@ app.post("/students", async (req: Request, res: Response) => {
   const { students } = req.body;
   await prisma.student.createMany({
     data: students,
-    skipDuplicates: true
+    skipDuplicates: true,
   });
 
   res.sendStatus(201); // created
